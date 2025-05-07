@@ -18,7 +18,7 @@ app.use((req,res,next)=>{
     if(token!=null){
         token=token.replace("Bearer ","")
 
-        jwt.verify(token,"cs-secret-8901",
+        jwt.verify(token,process.JWT_SECRET,
             (err, decoded) => {
                 if(!err){
                     req.user = decoded;

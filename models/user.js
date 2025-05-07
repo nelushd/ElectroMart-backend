@@ -35,6 +35,11 @@ const UserSchema = new mongoose.Schema({
     review: {
         type: String,
         required: false
+    },
+    profilePicture : {
+        type: String,
+        required: false,
+        default : "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg?w=768"
     }
 });
 

@@ -73,3 +73,29 @@ export function deleteReview(req,res){
         ({error:"Review deleted failed"});
     });
 }
+export function approveReview(req,res){
+    const email = req.params.email;
+
+    
+    if(req.user == null){
+        res.status(401).json({message:"Please login and try again"});
+        return
+    }
+
+      if(req.user.role == "admin"){
+        Review.updateOne(
+            {
+             email: email,
+            },
+            {
+                isApproved : true
+            }
+        ).then(() => {res.json({message:"Review approved succssfully"});
+        }).catch(() =>{
+            res.status(500).json({error:"Review deletion failed"});
+        });
+    }else {
+        res.status(403).json({message: "You are not an admin only admins can approve the reviews"});
+    }
+    
+} 

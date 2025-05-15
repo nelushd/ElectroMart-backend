@@ -35,6 +35,41 @@ export function getReview(req,res){
             res.json(review);
         });
     }
+}
+export function deleteReview(req,res){
+    const email = req.params.email;
 
 
+    if(req.user == null){
+        res.status(401).json({message:"Please login and try again"});
+        return
+    }
+    if(req.user.role == "admin"){
+        Review.deleteOne({email:email}).then(() => {res.json({message:"Review deleted succssfully"}).catch(() =>{
+            res.status(500).json({error:"Review deletion failed"});
+        })
+    });
+        return
+    }
+    if (req.user.role === "customer") { 
+
+        if (req.user.email === email) {
+        Review.deleteOne({ email: email })
+        .then(() => {
+         res.json({ message: "Review deleted successfully" });
+         })
+        .catch(() => {
+        res.status(500).json({ error: "Review deletion failed" });
+        });
+        } else {
+         res.status(403).json({ message: "you are not authorizd to perform this action"});
+        }
+        return
+    }
+
+    Review.deleteOne({email:email}).then(()=>{
+        res.json({message:"Review deleted successfully"});
+    }).catch(()=>{
+        ({error:"Review deleted failed"});
+    });
 }

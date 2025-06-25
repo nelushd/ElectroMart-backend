@@ -65,7 +65,7 @@ export function deleteReview(req,res){
          res.status(403).json({ message: "you are not authorizd to perform this action"});
         }
         return
-    }
+    }  
 
     Review.deleteOne({email:email}).then(()=>{
         res.json({message:"Review deleted successfully"});

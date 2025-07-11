@@ -36,7 +36,7 @@ const ProductSchema = new mongoose.Schema({
    image: {
     type: [String],
     required: true,
-    default: ["https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg?w=768"]
+    default: ["https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"]
       
   },
 })
